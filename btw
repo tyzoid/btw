@@ -13,7 +13,7 @@ if [ "$name" = "btw" ]; then
 	fi;
 fi;
 
-PATH="$(tr ':' '\n' <<< "$PATH" | grep -v "$pr" | tr '\n' ':')"
+PATH="$(tr ':' '\n' <<< "$PATH" | grep -Fxv "$pr" | tr '\n' ':')"
 if ! which "$name" &>/dev/null; then
 	echo "btw: $name: command not found" >&2
 	exit 127
