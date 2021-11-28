@@ -1,0 +1,22 @@
+#!/bin/sh
+
+name="$(basename "$0")"
+pr="$(dirname "$0")"
+
+if [ "$name" = "btw" ]; then
+	if [ -z "$*" ]; then
+		echo "Thank you for using BtwOS";
+		exit;
+	else
+		name="$1";
+		shift;
+	fi;
+fi;
+
+PATH="$(tr ':' '\n' <<< "$PATH" | grep -v "$pr" | tr '\n' ':')"
+if ! which "$name" &>/dev/null; then
+	echo "btw: $name: command not found" >&2
+	exit 127
+else
+	$name "$@" | sed 's/Arch Linux/Arch Linux Btw/g'
+fi
